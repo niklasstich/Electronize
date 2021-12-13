@@ -1,0 +1,22 @@
+@page "/save"
+@using ElectronNET.API
+@using ElectronNET.API.Entities
+@using Electronize.Data
+@inject IFileSavingService SavingService
+@inject IJSRuntime JS
+<h3>Save</h3>
+<p>@clipboard</p>
+<button class="btn btn-primary" @onclick="save">Click me</button>
+@code {
+    private string clipboard = "";
+    
+    private async void save()
+    {
+        if (HybridSupport.IsElectronActive)
+            clipboard = await Electron.Clipboard.ReadTextAsync();
+        else
+            clipboard = "your super secret clipboard contents";
+        await SavingService.SaveData(clipboard, JS);
+        
+    }
+}
