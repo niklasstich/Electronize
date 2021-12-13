@@ -24,10 +24,12 @@ public class ElectronFileSavingService : IFileSavingService
             {
                 new() { Name = "Text file", Extensions = new string[] { "txt" } }
             },
-            DefaultPath = "test"
+            DefaultPath = "test.txt"
         };
         
         var filePath = await Electron.Dialog.ShowSaveDialogAsync(mainWindow, options);
+        if (filePath == "")
+            return;
         await File.WriteAllLinesAsync(filePath, new string[]{data}, CancellationToken.None);
         Electron.Notification.Show(new NotificationOptions("File saved", $"Saved file at {filePath}"));
         
