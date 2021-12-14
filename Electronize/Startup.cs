@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Electronize.Data;
 using ElectronNET.API;
+using ElectronNET.API.Entities;
 using Microsoft.JSInterop;
 
 namespace Electronize
@@ -66,8 +67,17 @@ namespace Electronize
                 endpoints.MapFallbackToPage("/_Host");
             });
             if (HybridSupport.IsElectronActive)
-                Task.Run(async () => await Electron.WindowManager.CreateWindowAsync());
-           
+                Task.Run(async () =>
+                {
+                    var options = new BrowserWindowOptions
+                    {
+                        Fullscreenable = true,
+                        
+                    };
+                    return await Electron.WindowManager.CreateWindowAsync(options);
+                });
+            //exit app on all windows closed
+            Electron.App.WindowAllClosed += () => Electron.App.Exit();
         }
     }
 }
