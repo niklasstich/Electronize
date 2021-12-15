@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Electronize.Components;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Hosting;
@@ -32,6 +33,8 @@ namespace Electronize
             services.AddRazorPages();
             services.AddServerSideBlazor();
             services.AddSingleton<WeatherForecastService>();
+            services.AddSingleton<MouseService>();
+            services.AddSingleton<IMouseService>(provider => provider.GetRequiredService<MouseService>());
             if (HybridSupport.IsElectronActive)
             {
                 services.AddSingleton<IFileSavingService, ElectronFileSavingService>();
