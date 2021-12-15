@@ -1,11 +1,9 @@
 using System.IO;
 using System.Linq;
-using System.Runtime.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
 using ElectronNET.API;
 using ElectronNET.API.Entities;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.JSInterop;
 
 namespace Electronize.Data;
