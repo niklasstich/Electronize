@@ -4,7 +4,7 @@ using Electronize.Pages;
 
 namespace ElectronizeTest;
 
-public class Tests
+public class CounterTest
 {
     [SetUp]
     public void Setup()
