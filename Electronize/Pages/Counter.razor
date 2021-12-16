@@ -4,7 +4,8 @@
 
 <p>Current count: @currentCount</p>
 
-<button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+<button class="btn btn-primary" @onclick="IncrementCount" id="incBtn">Click me</button>
+<button class="btn btn-primary" @onclick="DecrementCount" id="decBtn">Click me</button>
 
 @code {
     private int currentCount = 0;
@@ -12,6 +13,14 @@
     private void IncrementCount()
     {
         currentCount+=Test.TestMe();
+    }
+
+    private void DecrementCount()
+    {
+        if (currentCount % 2 == 0)
+            currentCount--;
+        else
+            currentCount -= 3;
     }
 
 }
