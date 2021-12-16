@@ -23,5 +23,7 @@ public class Tests
         
         button.Click();
         counter.MarkupMatches("<p>Current count: 42</p>");
+        button.Click();
+        counter.MarkupMatches("<p>Current count: 84</p>");
     }
 }
