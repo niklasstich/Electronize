@@ -24,6 +24,7 @@ namespace Electronize
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
+            services.AddElectron();
             services.AddServerSideBlazor();
             services.AddSingleton<WeatherForecastService>();
             services.AddSingleton<MouseService>();

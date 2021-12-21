@@ -1,17 +1,13 @@
-using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
-using Bunit;
-using Electronize;
-using Microsoft.Extensions.DependencyInjection;
-using NUnit.Framework;
 using Electronize.Data;
-using Electronize.Pages;
 using ElectronNET.API;
-using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Web;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Hosting;
+using ElectronNET.API.Entities;
+using ElectronNET.API.Interfaces;
+using NUnit.Framework;
+using NSubstitute;
 
 namespace ElectronizeTest;
 
@@ -24,23 +20,25 @@ public class SaveTest
     }
 
     [Test]
-    public async Task TestSavePageWithMockService()
+    public async Task ElectronFileSavingServiceCallsElectron()
     {
-        using var ctx = new Bunit.TestContext();
-        ctx.Services.AddSingleton<IFileSavingService>(new MockFileSavingService());
+        var windowManager = Substitute.For<IWindowManager>();
+        var window = Substitute.For<IBrowserWindow>();
+        windowManager.BrowserWindows.Returns(new []{window});
         
-        var page = ctx.RenderComponent<Save>();
-        var input = page.Find("input");
-        const string target = "written from inside the test";
-        await input.ChangeAsync(new ChangeEventArgs
-        {
-            Value = target
-        });
-        await page.Find("button").ClickAsync(new MouseEventArgs());
-        page.Find("p").MarkupMatches("<p>written from inside the test</p>");
-        var path = MockFileSavingService.Path;
+        var dialog = Substitute.For<IDialog>();
+        var path = Directory.GetCurrentDirectory() + "test.txt";
+        dialog.ShowSaveDialogAsync(window, Arg.Any<SaveDialogOptions>()).Returns(path);
+        
+        var notification = Substitute.For<INotification>();
+        
+        var fileSavingService = new ElectronFileSavingService(windowManager, dialog, notification);
+        await fileSavingService.SaveDataAsync("testdata123", null);
+        
         Assert.IsTrue(File.Exists(path));
-        var fileContent = await File.ReadAllTextAsync(path);
-        Assert.AreEqual(target, fileContent);
+        Assert.AreEqual("testdata123\n", await File.ReadAllTextAsync(path));
+
+        dialog.Received().ShowSaveDialogAsync(window, Arg.Any<SaveDialogOptions>());
+        notification.Received().Show(Arg.Any<NotificationOptions>());
     }
 }

@@ -7,7 +7,7 @@ namespace Electronize.Data;
 
 public class BrowserFileSavingService : IFileSavingService
 {
-    public async Task SaveData(string data, IJSRuntime jsRuntime)
+    public async Task SaveDataAsync(string data, IJSRuntime jsRuntime)
     {
         var fileStream = new MemoryStream(Encoding.ASCII.GetBytes(data));
         var fileName = "download.txt";

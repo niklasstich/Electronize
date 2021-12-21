@@ -1,17 +1,16 @@
 @page "/save"
-@using ElectronNET.API
 @using Electronize.Data
 @inject IFileSavingService SavingService
 @inject IJSRuntime JS
 <h3>Save</h3>
 <input @bind="saveString">
 <p>@saveString</p>
-<button class="btn btn-primary" @onclick="save">Click me</button>
+<button class="btn btn-primary" @onclick="DoSave">Click me</button>
 @code {
     private string saveString = "your super secret clipboard contents";
     
-    private async void save()
+    private async void DoSave()
     {
-        await SavingService.SaveData(saveString, JS);
+        await SavingService.SaveDataAsync(saveString, JS);
     }
 }

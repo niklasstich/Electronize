@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Electronize", "Electronize\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElectronizeTest", "ElectronizeTest\ElectronizeTest.csproj", "{E511E32B-989A-4132-81D2-D92903FF4EA8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElectronNET.API", "Electron.NET\ElectronNET.API\ElectronNET.API.csproj", "{0C7284DE-E9FE-4ADF-979A-26B4466DF463}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{E511E32B-989A-4132-81D2-D92903FF4EA8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E511E32B-989A-4132-81D2-D92903FF4EA8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E511E32B-989A-4132-81D2-D92903FF4EA8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C7284DE-E9FE-4ADF-979A-26B4466DF463}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C7284DE-E9FE-4ADF-979A-26B4466DF463}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C7284DE-E9FE-4ADF-979A-26B4466DF463}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C7284DE-E9FE-4ADF-979A-26B4466DF463}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
