@@ -36,7 +36,7 @@ public class SaveTest
         Assert.IsTrue(File.Exists(path));
         Assert.AreEqual("testdata123\n", await File.ReadAllTextAsync(path));
 
-        dialog.Received().ShowSaveDialogAsync(window, Arg.Any<SaveDialogOptions>());
+        await dialog.Received().ShowSaveDialogAsync(window, Arg.Any<SaveDialogOptions>());
         notification.Received().Show(Arg.Any<NotificationOptions>());
     }
 }

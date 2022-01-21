@@ -1,16 +1,23 @@
 @page "/save"
 @using Electronize.Data
-@inject IFileSavingService SavingService
-@inject IJSRuntime JS
 <h3>Save</h3>
 <input @bind="saveString">
 <p>@saveString</p>
 <button class="btn btn-primary" @onclick="DoSave">Click me</button>
 @code {
-    private string saveString = "your super secret clipboard contents";
+    private IFileSavingService SavingService { get; set; }
+    private IJSRuntime JsRuntime { get; set; }
+    
+    public Save(IFileSavingService savingService, IJSRuntime jsRuntime)
+    {
+        saveString = "your super secret clipboard contents";
+        SavingService = savingService;
+        JsRuntime = jsRuntime;
+    }
+    private string saveString;
     
     private async void DoSave()
     {
-        await SavingService.SaveDataAsync(saveString, JS);
+        await SavingService.SaveDataAsync(saveString, JsRuntime);
     }
 }

@@ -69,7 +69,6 @@ namespace Electronize
                     var options = new BrowserWindowOptions
                     {
                         Fullscreenable = true,
-                        
                     };
                     return await Electron.WindowManager.CreateWindowAsync(options);
                 });
